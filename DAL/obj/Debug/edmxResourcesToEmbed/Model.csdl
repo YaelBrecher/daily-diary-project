@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaskDay">
+    <Key>
+      <PropertyRef Name="TaskDaysId" />
+    </Key>
+    <Property Name="TaskDaysId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskDaysValue" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UserTaskId" Type="Int32" />
+    <NavigationProperty Name="UserTask" Relationship="Self.FK_TaskDays_UserTask" FromRole="TaskDays" ToRole="UserTask" />
+  </EntityType>
+  <EntityType Name="TaskType">
+    <Key>
+      <PropertyRef Name="TaskTypesId" />
+    </Key>
+    <Property Name="TaskTypesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskTypesName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserTasks" Relationship="Self.FK_UserTask_TaskTypes" FromRole="TaskTypes" ToRole="UserTask" />
+  </EntityType>
+  <EntityType Name="UserAlertReport">
+    <Key>
+      <PropertyRef Name="UserAlertReportId" />
+    </Key>
+    <Property Name="UserAlertReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTaskId" Type="Int32" />
+    <Property Name="UserAlertReportDate" Type="DateTime" Precision="0" />
+    <Property Name="UserAlertReportStatus" Type="Boolean" />
+    <Property Name="UserAlertReportType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserAlertReportMinutes" Type="Int32" />
+    <NavigationProperty Name="UserTask" Relationship="Self.FK_UserAlertReport_UserTask" FromRole="UserAlertReport" ToRole="UserTask" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserLoginName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="UserFirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserFirstPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UserSecondPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserTasks" Relationship="Self.FK_UserTask_Users" FromRole="Users" ToRole="UserTask" />
+  </EntityType>
+  <EntityType Name="UserTask">
+    <Key>
+      <PropertyRef Name="UserTaskId" />
+    </Key>
+    <Property Name="UserTaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="TaskTypesId" Type="Int32" />
+    <Property Name="UserTaskTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserTaskComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserTaskLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserTaskImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserTaskDate" Type="DateTime" Precision="0" />
+    <Property Name="UserTaskStartTime" Type="Time" Precision="7" />
+    <Property Name="UserTaskEndTime" Type="Time" Precision="7" />
+    <Property Name="UserTaskDays" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TaskDays" Relationship="Self.FK_TaskDays_UserTask" FromRole="UserTask" ToRole="TaskDays" />
+    <NavigationProperty Name="TaskType" Relationship="Self.FK_UserTask_TaskTypes" FromRole="UserTask" ToRole="TaskTypes" />
+    <NavigationProperty Name="UserAlertReports" Relationship="Self.FK_UserAlertReport_UserTask" FromRole="UserTask" ToRole="UserAlertReport" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserTask_Users" FromRole="UserTask" ToRole="Users" />
+    <NavigationProperty Name="UserTaskAlerts" Relationship="Self.FK_UserTaskAlert_UserTask" FromRole="UserTask" ToRole="UserTaskAlert" />
+  </EntityType>
+  <EntityType Name="UserTaskAlert">
+    <Key>
+      <PropertyRef Name="UserTaskAlertId" />
+    </Key>
+    <Property Name="UserTaskAlertId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTaskId" Type="Int32" />
+    <Property Name="UserTaskAlertTime" Type="Int32" />
+    <Property Name="UserTaskAlertSnoozeStatus" Type="Boolean" />
+    <Property Name="UserTaskAlertSnoozeMinutes" Type="Int32" />
+    <NavigationProperty Name="UserTask" Relationship="Self.FK_UserTaskAlert_UserTask" FromRole="UserTaskAlert" ToRole="UserTask" />
+  </EntityType>
+  <Association Name="FK_TaskDays_UserTask">
+    <End Role="UserTask" Type="Self.UserTask" Multiplicity="0..1" />
+    <End Role="TaskDays" Type="Self.TaskDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTask">
+        <PropertyRef Name="UserTaskId" />
+      </Principal>
+      <Dependent Role="TaskDays">
+        <PropertyRef Name="UserTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTask_TaskTypes">
+    <End Role="TaskTypes" Type="Self.TaskType" Multiplicity="0..1" />
+    <End Role="UserTask" Type="Self.UserTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskTypes">
+        <PropertyRef Name="TaskTypesId" />
+      </Principal>
+      <Dependent Role="UserTask">
+        <PropertyRef Name="TaskTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAlertReport_UserTask">
+    <End Role="UserTask" Type="Self.UserTask" Multiplicity="0..1" />
+    <End Role="UserAlertReport" Type="Self.UserAlertReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTask">
+        <PropertyRef Name="UserTaskId" />
+      </Principal>
+      <Dependent Role="UserAlertReport">
+        <PropertyRef Name="UserTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTask_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserTask" Type="Self.UserTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserTask">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTaskAlert_UserTask">
+    <End Role="UserTask" Type="Self.UserTask" Multiplicity="0..1" />
+    <End Role="UserTaskAlert" Type="Self.UserTaskAlert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTask">
+        <PropertyRef Name="UserTaskId" />
+      </Principal>
+      <Dependent Role="UserTaskAlert">
+        <PropertyRef Name="UserTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TaskDays" EntityType="Self.TaskDay" />
+    <EntitySet Name="TaskTypes" EntityType="Self.TaskType" />
+    <EntitySet Name="UserAlertReports" EntityType="Self.UserAlertReport" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTasks" EntityType="Self.UserTask" />
+    <EntitySet Name="UserTaskAlerts" EntityType="Self.UserTaskAlert" />
+    <AssociationSet Name="FK_TaskDays_UserTask" Association="Self.FK_TaskDays_UserTask">
+      <End Role="UserTask" EntitySet="UserTasks" />
+      <End Role="TaskDays" EntitySet="TaskDays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTask_TaskTypes" Association="Self.FK_UserTask_TaskTypes">
+      <End Role="TaskTypes" EntitySet="TaskTypes" />
+      <End Role="UserTask" EntitySet="UserTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAlertReport_UserTask" Association="Self.FK_UserAlertReport_UserTask">
+      <End Role="UserTask" EntitySet="UserTasks" />
+      <End Role="UserAlertReport" EntitySet="UserAlertReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTask_Users" Association="Self.FK_UserTask_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserTask" EntitySet="UserTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTaskAlert_UserTask" Association="Self.FK_UserTaskAlert_UserTask">
+      <End Role="UserTask" EntitySet="UserTasks" />
+      <End Role="UserTaskAlert" EntitySet="UserTaskAlerts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ProjectDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskDays">
+      <EntityTypeMapping TypeName="ProjectDBModel.TaskDay">
+        <MappingFragment StoreEntitySet="TaskDays">
+          <ScalarProperty Name="TaskDaysId" ColumnName="TaskDaysId" />
+          <ScalarProperty Name="TaskDaysValue" ColumnName="TaskDaysValue" />
+          <ScalarProperty Name="UserTaskId" ColumnName="UserTaskId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskTypes">
+      <EntityTypeMapping TypeName="ProjectDBModel.TaskType">
+        <MappingFragment StoreEntitySet="TaskTypes">
+          <ScalarProperty Name="TaskTypesId" ColumnName="TaskTypesId" />
+          <ScalarProperty Name="TaskTypesName" ColumnName="TaskTypesName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAlertReports">
+      <EntityTypeMapping TypeName="ProjectDBModel.UserAlertReport">
+        <MappingFragment StoreEntitySet="UserAlertReport">
+          <ScalarProperty Name="UserAlertReportId" ColumnName="UserAlertReportId" />
+          <ScalarProperty Name="UserTaskId" ColumnName="UserTaskId" />
+          <ScalarProperty Name="UserAlertReportDate" ColumnName="UserAlertReportDate" />
+          <ScalarProperty Name="UserAlertReportStatus" ColumnName="UserAlertReportStatus" />
+          <ScalarProperty Name="UserAlertReportType" ColumnName="UserAlertReportType" />
+          <ScalarProperty Name="UserAlertReportMinutes" ColumnName="UserAlertReportMinutes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ProjectDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserLoginName" ColumnName="UserLoginName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="UserFirstPhone" ColumnName="UserFirstPhone" />
+          <ScalarProperty Name="UserSecondPhone" ColumnName="UserSecondPhone" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTasks">
+      <EntityTypeMapping TypeName="ProjectDBModel.UserTask">
+        <MappingFragment StoreEntitySet="UserTask">
+          <ScalarProperty Name="UserTaskId" ColumnName="UserTaskId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="TaskTypesId" ColumnName="TaskTypesId" />
+          <ScalarProperty Name="UserTaskTitle" ColumnName="UserTaskTitle" />
+          <ScalarProperty Name="UserTaskComments" ColumnName="UserTaskComments" />
+          <ScalarProperty Name="UserTaskLink" ColumnName="UserTaskLink" />
+          <ScalarProperty Name="UserTaskImage" ColumnName="UserTaskImage" />
+          <ScalarProperty Name="UserTaskDate" ColumnName="UserTaskDate" />
+          <ScalarProperty Name="UserTaskStartTime" ColumnName="UserTaskStartTime" />
+          <ScalarProperty Name="UserTaskEndTime" ColumnName="UserTaskEndTime" />
+          <ScalarProperty Name="UserTaskDays" ColumnName="UserTaskDays" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTaskAlerts">
+      <EntityTypeMapping TypeName="ProjectDBModel.UserTaskAlert">
+        <MappingFragment StoreEntitySet="UserTaskAlert">
+          <ScalarProperty Name="UserTaskAlertId" ColumnName="UserTaskAlertId" />
+          <ScalarProperty Name="UserTaskId" ColumnName="UserTaskId" />
+          <ScalarProperty Name="UserTaskAlertTime" ColumnName="UserTaskAlertTime" />
+          <ScalarProperty Name="UserTaskAlertSnoozeStatus" ColumnName="UserTaskAlertSnoozeStatus" />
+          <ScalarProperty Name="UserTaskAlertSnoozeMinutes" ColumnName="UserTaskAlertSnoozeMinutes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
