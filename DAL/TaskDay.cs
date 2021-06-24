@@ -14,8 +14,8 @@ namespace DAL
     
     public partial class TaskDay
     {
-        public int TaskDaysId { get; set; }
-        public string TaskDaysValue { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> Value { get; set; }
         public Nullable<int> UserTaskId { get; set; }
     
         public virtual UserTask UserTask { get; set; }

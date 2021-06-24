@@ -20,14 +20,14 @@ namespace DAL
             this.UserTasks = new HashSet<UserTask>();
         }
     
-        public int UserId { get; set; }
-        public string UserLoginName { get; set; }
-        public string UserPassword { get; set; }
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
-        public string UserFirstPhone { get; set; }
-        public string UserSecondPhone { get; set; }
-        public string UserEmail { get; set; }
+        public int Id { get; set; }
+        public string LoginName { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FirstPhone { get; set; }
+        public string SecondPhone { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTask> UserTasks { get; set; }

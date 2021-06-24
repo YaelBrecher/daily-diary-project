@@ -14,12 +14,12 @@ namespace DAL
     
     public partial class UserAlertReport
     {
-        public int UserAlertReportId { get; set; }
+        public int Id { get; set; }
         public Nullable<int> UserTaskId { get; set; }
-        public Nullable<System.DateTime> UserAlertReportDate { get; set; }
-        public Nullable<bool> UserAlertReportStatus { get; set; }
-        public string UserAlertReportType { get; set; }
-        public Nullable<int> UserAlertReportMinutes { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string Type { get; set; }
+        public Nullable<int> Minutes { get; set; }
     
         public virtual UserTask UserTask { get; set; }
     }

@@ -8,7 +8,7 @@ namespace DTO
 {
     public class TaskTypeDTO
     {
-        public int TaskTypesId { get; set; }
-        public string TaskTypesName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

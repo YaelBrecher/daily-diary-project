@@ -20,8 +20,8 @@ namespace DAL
             this.UserTasks = new HashSet<UserTask>();
         }
     
-        public int TaskTypesId { get; set; }
-        public string TaskTypesName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTask> UserTasks { get; set; }

@@ -14,11 +14,11 @@ namespace DAL
     
     public partial class UserTaskAlert
     {
-        public int UserTaskAlertId { get; set; }
+        public int Id { get; set; }
         public Nullable<int> UserTaskId { get; set; }
-        public Nullable<int> UserTaskAlertTime { get; set; }
-        public Nullable<bool> UserTaskAlertSnoozeStatus { get; set; }
-        public Nullable<int> UserTaskAlertSnoozeMinutes { get; set; }
+        public Nullable<int> Time { get; set; }
+        public Nullable<bool> SnoozeStatus { get; set; }
+        public Nullable<int> SnoozeMinutes { get; set; }
     
         public virtual UserTask UserTask { get; set; }
     }
